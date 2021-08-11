@@ -42,5 +42,5 @@ jobs:
           
       # Runs my own steps
       - name: Run test.sh
-        run: ./test.sh
+        run: cd $GITHUB_WORKSPACE && ./build.sh
           
