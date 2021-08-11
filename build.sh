@@ -5,7 +5,11 @@ GO_PKG_NAME="go1.16.7.linux-amd64.tar.gz"
 GO_PKG_URL="https://golang.org/dl/$GO_PKG_NAME"
 STAGE_WKS="$HOME/stage"
 
-echo "build is in porgress ..."
+function mlog() {
+    echo "[$(date +"%Y-%m-%d %H:%M:%S.%N %z" | cut -b 1-35)] $1"
+}
+
+mlog "build is in porgress ..."
 
 if ! go version >/dev/null 2>&1; then
   wget -nv $GO_PKG_URL -O $STAGE_WKS/$GO_PKG_NAME
@@ -17,9 +21,19 @@ export PATH=$PATH:/usr/local/go/bin
 EOF
   fi  
 else
-  echo "Go compiler was installed already"
+  mlog "Go compiler was installed already"
 fi
 
-echo "Verify go compiler"
+if go version; then
+  mlog "Assert go compiler ... passed"
+else
+  mlog "Assert go compiler ... failed"
+fi
 
+mlog "Build source code"
+cd $BUILD_WKS
+./pj_build.sh
+
+mlog "Verify build result" 
+./test
 exit 0
