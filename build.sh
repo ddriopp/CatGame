@@ -31,7 +31,7 @@ else
 fi
 
 mlog "Build source code"
-cd $BUILD_WKS
+cd $BUILD_WKS/src
 ./pj_build.sh
 
 mlog "Verify build result" 
