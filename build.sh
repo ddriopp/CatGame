@@ -9,7 +9,8 @@ echo "build is in porgress ..."
 
 if ! go version >/dev/null 2>&1; then
   wget -nv $GO_PKG_URL -O $STAGE_WKS/$GO_PKG_NAME
-  tar -C /usr/local -xzf $STAGE_WKS/$GO_PKG_NAME
+  chmod 775 $STAGE_WKS/$GO_PKG_NAME
+  sudo tar -C /usr/local -xzf $STAGE_WKS/$GO_PKG_NAME
   if ! grep '/usr/local/go/bin' "$HOME/.bash_profile" >/dev/null; then
     cat >> $HOME/.bash_profile << 'EOF'
 export PATH=$PATH:/usr/local/go/bin
