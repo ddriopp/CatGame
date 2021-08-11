@@ -24,14 +24,18 @@ else
   mlog "Go compiler was installed already"
 fi
 
-if go version; then
+mlog "Source bash profile after compiler install"
+source ~/.bash_profile
+if go version >/dev/null 2>&1; then
   mlog "Assert go compiler ... passed"
 else
   mlog "Assert go compiler ... failed"
+  exit 1
 fi
 
 mlog "Build source code"
 cd $BUILD_WKS/src
+chmod 755 pj_build.sh
 ./pj_build.sh
 
 mlog "Verify build result" 
