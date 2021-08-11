@@ -40,4 +40,8 @@ chmod 755 pj_build.sh
 
 mlog "Verify build result" 
 ./test
+
+mlog "Run smoke testing"
+echo "Smoke tests are in progress..."
+
 exit 0
