@@ -8,24 +8,33 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_job:
-    runs-on: ${{ matrix.distro }}
-    name: Build on ${{ matrix.distro }}
-
-    # Run steps on a matrix of 3 arch/distro combinations
+  build:
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        distro: [ubuntu-18.04, windows-2019]
-            
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+        node_version:
+          - 12
+          - 14
+          - 16
+        architecture:
+          - x64
+    name: Node ${{ matrix.node_version }} - ${{ matrix.architecture }} on ${{ matrix.os }}
     steps:
-    - uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.distro }}
-    - name: Install Go compiler
-      uses: actions/setup-go@v2
-      with:
-        go-version: 1.16
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node_version }}
+          architecture: ${{ matrix.architecture }}
+      - name: Install Go compiler
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
 
-    - name: Build MatrixCube on ${{ matrix.distro }}
-      run: echo "make test"
+      - name: Build MatrixCube on ${{ matrix.distro }}
+        run: echo "make test"
       
