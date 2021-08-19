@@ -18,8 +18,6 @@ jobs:
           - windows-latest
         node_version:
           - 16
-          - 16
-          - 16
         architecture:
           - x64
     name: Node ${{ matrix.node_version }} - ${{ matrix.architecture }} on ${{ matrix.os }}
