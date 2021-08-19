@@ -1,4 +1,4 @@
-name: Build On Multi-platform
+name: NewCI
 
 on:
   push:
