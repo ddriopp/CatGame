@@ -11,15 +11,12 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    name: Build on ${{ matrix.config.distro }}
+    name: Build on ${{ matrix.distro }}
 
     # Run steps on a matrix of 3 arch/distro combinations
     strategy:
       matrix:
-        config:
-          - distro: ubuntu-latest
-          - distro: windows-latest
-          - distro: macos-11
+        distro: [ubuntu-latest, windows-latest, macos-11]
 
     steps:
       - uses: actions/checkout@v2.1.0
@@ -27,6 +24,4 @@ jobs:
         name: Build artifact
         id: build
         with:
-          distro: ${{ matrix.config.distro }}
-        run:
-          echo "build starting"
+          distro: ${{ matrix.distro }}
