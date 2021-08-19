@@ -8,20 +8,25 @@ on:
   workflow_dispatch:
 
 jobs:
-
-  build:
+  build_job:
     runs-on: ubuntu-latest
     name: Build on ${{ matrix.distro }}
 
     # Run steps on a matrix of 3 arch/distro combinations
     strategy:
       matrix:
-        distro: [ubuntu-latest, windows-latest, macos-11]
-
+        include:
+          - arch: aarch64
+            distro: ubuntu_latest
+          - arch: aarch64
+            distro: windows_latest
+            
     steps:
       - uses: actions/checkout@v2.1.0
       - uses: uraimo/run-on-arch-action@v2.0.5
         name: Build artifact
         id: build
         with:
+          arch: ${{ matrix.arch }}
           distro: ${{ matrix.distro }}
+      
