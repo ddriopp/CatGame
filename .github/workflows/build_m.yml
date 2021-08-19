@@ -23,7 +23,7 @@ jobs:
         go-version:
           - 1.16
           - 1.17
-    name: Node ${{ matrix.node_version }} - ${{ matrix.architecture }} on ${{ matrix.os }} with compiler Go ${{ matrix.go-version }}
+    name: Build MatrixCube on ${{ matrix.architecture }} ${{ matrix.os }} with compiler Go v${{ matrix.go-version }}
     steps:
       - uses: actions/checkout@v2
       - name: Setup node
@@ -31,11 +31,11 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
           architecture: ${{ matrix.architecture }}
-      - name: Install Go compiler
+      - name: Install compiler Go 
         uses: actions/setup-go@v2
         with:
           go-version: ${{ matrix.go-version }}
 
-      - name: Build MatrixCube on ${{ matrix.distro }}
+      - name: Build binary
         run: echo "make test"
       
