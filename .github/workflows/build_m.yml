@@ -11,7 +11,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    name: Build on ${{ matrix.config.distro }} ${{ matrix.config.arch }}
+    name: Build on ${{ matrix.include.distro }} ${{ matrix.include.arch }}
 
     # Run steps on a matrix of 3 arch/distro combinations
     strategy:
@@ -30,7 +30,7 @@ jobs:
         name: Build artifact
         id: build
         with:
-          arch: ${{ matrix.config.arch }}
-          distro: ${{ matrix.config.distro }}
+          arch: ${{ matrix.include.arch }}
+          distro: ${{ matrix.include.distro }}
         run:
           echo "build starting"
