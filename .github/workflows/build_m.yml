@@ -15,7 +15,7 @@ jobs:
     # Run steps on a matrix of 3 arch/distro combinations
     strategy:
       matrix:
-        distro: [ubuntu_latest, windows_latest]
+        distro: [ubuntu-18.04, windows-2019]
             
     steps:
     - uses: actions/setup-node@v2
