@@ -1,0 +1,33 @@
+name: Build On Mulit-plaforms
+
+on:
+  pull_request:
+    branches: main
+
+jobs:
+  build_on_lnx:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Go compiler
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.16
+
+    - name: Build MatrixCube on Linux
+      run: echo "make test"
+  
+  build_on_win:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Go compiler
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.16
+
+    - name: Build MatrixCube on Windows
+      run: echo "make test"
+
