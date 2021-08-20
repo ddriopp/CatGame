@@ -35,7 +35,9 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: ${{ matrix.go-version }}
-
+      - name: Get runner environment variables
+        id: runner
+        uses: msansoni/runner-environment-action@v1
       - name: Build binary
         run: echo "make test"
       
